@@ -14,6 +14,8 @@ def formatar_numero(valor, prefixo=''):
 
 st.title('DASHBOARD DE VENDAS :shopping_cart:')
 
+aba1, aba2, aba3 = st.tabs(['Receita','Quantidade de Vendas','vendedores'])
+
 url = 'https://labdados.com/produtos'
 response = requests.get(url)
 dados = pd.DataFrame.from_dict(response.json())
@@ -67,18 +69,47 @@ fig_receita_estados.update_layout(yaxis_title='Receita')
 
 
 ## Visualizações no Streamlit
-coluna1 , coluna2 = st.columns(2)
-with coluna1:
-    st.metric('Receita',formatar_numero(dados['Preço'].sum()), 'R$')
-    st.plotly_chart(fig_mapa_receita, use_container_width=True)
-    st.plotly_chart(fig_receita_estados, use_container_width=True)
 
-with coluna2:
-    st.metric('quantidade de vendas',formatar_numero(dados.shape[0]))
-    st.plotly_chart(fig_receita_mensal, use_container_width=True)
-    st.plotly_chart(fig_receita_categoria, use_container_width=True)
+## Criação de Abas
+##aba1, aba2, aba3 = st.tabs(['Receita','Quantidade de Vendas','vendedores'])
 
 
+##Criação de colunas aba 1
+with aba1:
+     coluna1 , coluna2 = st.columns(2)
+     with coluna1:
+         st.metric('Receita',formatar_numero(dados['Preço'].sum()), 'R$')
+         st.plotly_chart(fig_mapa_receita, use_container_width=True)
+         st.plotly_chart(fig_receita_estados, use_container_width=True)
 
-st.dataframe(dados)
+     with coluna2:
+         st.metric('quantidade de vendas',formatar_numero(dados.shape[0]))
+         st.plotly_chart(fig_receita_mensal, use_container_width=True)
+         st.plotly_chart(fig_receita_categoria, use_container_width=True)
+
+
+##Criação de colunas aba 2
+with aba2:
+    coluna1 , coluna2 = st.columns(2)
+    with coluna1:
+        st.metric('Receita',formatar_numero(dados['Preço'].sum()), 'R$')
+
+
+    with coluna2:
+        st.metric('quantidade de vendas',formatar_numero(dados.shape[0]))
+
+##Criação de colunas aba 3
+with aba3:
+    coluna1 , coluna2 = st.columns(2)
+    with coluna1:
+        st.metric('Receita',formatar_numero(dados['Preço'].sum()), 'R$')
+
+
+    with coluna2:
+        st.metric('quantidade de vendas',formatar_numero(dados.shape[0]))
+
+
+
+
+#st.dataframe(dados)
 
