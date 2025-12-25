@@ -29,8 +29,7 @@ receita_mensal['Mes'] = receita_mensal['Data da Compra'].dt.month_name()
 
 
 
-## Graficos
-
+## Criação de Graficos
 fig_mapa_receita = px.scatter_geo(receitas_estados,
                                   lat= 'lat',
                                   lon= 'lon',
